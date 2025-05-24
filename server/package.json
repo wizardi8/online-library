@@ -1,0 +1,17 @@
+{
+  "name": "online-library-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rimraf --glob dist/**",
+    "start": "node src/index.js"
+  },
+  "author": "wizardi",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7"
+  }
+}
