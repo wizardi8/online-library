@@ -1,26 +1,24 @@
-const fs = require('fs');
 const path = require('path');
 const express = require('express');
 
-const app = express();
+const config = require('./config');
+const { MongoDB } = require('./MongoDB');
 
-// TODO favicon
-const FAFICON = path.join(__dirname,  '../../', 'client', 'public', 'favicon.ico');
-const PORT = 3003;
+new MongoDB()?.then(() => {
+    const app = express();
 
-app.get('/favicon.ico', (req, res) => {
-    res.setHeader('Content-Type', 'image/x-icon');
-    fs.createReadStream(FAFICON).pipe(res);
-});
+    app.use(express.json());
+    app.use(express.static(path.join(__dirname, '../../', 'client', 'build')));
 
-app.use(express.static(path.join(__dirname, '../../', 'client', 'build')));
+    const routes = require('./routes');
+    app.use(routes);
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../../../', 'client', 'build', '/index.html'));
-});
+    console.log('server started');
 
-console.log('server start');
-
-app.listen(PORT, () => {
-    console.log(`your app is listening to port ${PORT}`);
+    app.listen(config.port, () => {
+        console.log(`your app is listening to port ${config.port}`);
+    });
+}).catch((error) => {
+    console.log('mongo connection error');
+    console.log(error);
 });

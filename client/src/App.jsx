@@ -1,8 +1,12 @@
 import React from 'react';
 
+import MainPage from './components/MainPage/MainPage';
+
+import './index.css';
+
 function App() {
     return (
-        <div>Online library</div>
+        <MainPage />
     );
 }
 

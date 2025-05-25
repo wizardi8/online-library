@@ -1,6 +1,9 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
+require('dotenv').config({ path: '../server/.env' });
 
 module.exports = (env, arguments) => {
     return {
@@ -58,6 +61,11 @@ module.exports = (env, arguments) => {
                 filename: 'index.html',
                 template: path.join(__dirname, 'public', 'index.html'),
                 chunks: ['index'],
+            }),
+            new webpack.DefinePlugin({
+                'process.env': JSON.stringify({
+                    BASE_URL: process.env.BASE_URL,
+                })
             }),
         ],
     };
