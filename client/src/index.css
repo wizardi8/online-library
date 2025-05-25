@@ -57,7 +57,7 @@ body {
 
 .books-list {
     overflow-y: auto;
-    height: calc(100vh - 265px);
+    height: calc(100vh - 140px);
 }
 
 .books-list table {
