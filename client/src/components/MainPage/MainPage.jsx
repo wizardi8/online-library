@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
+
 import Modal from 'react-modal';
+const { v4: uuid4 } = require('uuid');
 
 import AddBookForm from '../AddBookForm';
+import { createBook, deleteBook, getBooks, updateBook } from '../../api/books';
 
-const { v4: uuid4 } = require('uuid');
 
 let subtitle;
 
@@ -26,17 +28,15 @@ const MainPage = () => {
     const [isAddBookLoading, setIsAddBookLoading] = useState(false);
 
     useEffect(() => {
-        setTimeout(() => {
-            fetch(`${process.env.BASE_URL}/api/books`).then((res) => res.json()).then((results) => {
-                const { data = [] } = results || {};
+        getBooks().then((results) => {
+            const { data = [] } = results || {};
 
-                setBooks(data);
-                setIsPageReady(true);
-                console.log(data);
-            }).catch((error) => {
-                console.log(error);
-            });
-        }, 500);
+            setBooks(data);
+            setIsPageReady(true);
+            console.log(data);
+        }).catch((error) => {
+            console.log(error);
+        });
     }, []);
 
     const openModal = () => {
@@ -79,18 +79,10 @@ const MainPage = () => {
 
         setIsAddBookLoading(true);
 
-        fetch(`${process.env.BASE_URL}/api/books`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(bookData),
-        })
+        createBook(bookData)
             .then(() => {
-                setTimeout(() => {
-                    setIsAddBookLoading(false);
-                    setBooks([...books, bookData]);
-                }, 500);
+                setIsAddBookLoading(false);
+                setBooks([...books, bookData]);
             }).catch((error) => {
             console.log(error);
             alert('[Error] Book not added');
@@ -135,13 +127,7 @@ const MainPage = () => {
 
         delete bookData._id;
 
-        fetch(`${process.env.BASE_URL}/api/books/${bookId}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(bookData),
-        })
+        updateBook(bookId, bookData)
             .then(() => {
                 setBooks(books.reduce((memo, book) => {
                     if (book.id === bookId) {
@@ -161,15 +147,9 @@ const MainPage = () => {
     };
 
     const onDeleteBookClick = (bookId) => {
-        fetch(`${process.env.BASE_URL}/api/books/${bookId}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-            .then(() => {
-                setBooks(books.filter((book) => book.id !== bookId));
-            }).catch((error) => {
+        deleteBook(bookId).then(() => {
+            setBooks(books.filter((book) => book.id !== bookId));
+        }).catch((error) => {
             console.log(error);
             alert('[Error] Book not added');
         });
