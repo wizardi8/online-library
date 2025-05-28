@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "clean": "rimraf --glob build/**",
-    "build": "npm run clean && webpack --mode development"
+    "build": "npm run clean && webpack --mode production",
+    "build:dev": "npm run clean && webpack --mode development"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.8.2",

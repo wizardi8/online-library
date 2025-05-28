@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "clean": "rimraf --glob dist/**",
-    "start": "dotenv cross-env mode=development node src/index.js"
+    "start": "dotenv cross-env mode=production node src/index.js",
+    "start:dev": "dotenv cross-env mode=development node src/index.js"
   },
   "author": "wizardi",
   "license": "ISC",
