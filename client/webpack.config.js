@@ -2,8 +2,6 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
-require('dotenv').config({ path: '../server/.env' });
-
 module.exports = (env, arguments) => {
     return {
         entry: {
