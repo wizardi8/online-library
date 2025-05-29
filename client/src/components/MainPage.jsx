@@ -1,19 +1,46 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getStoreBooks } from '../../utils/selectors';
-import { setModal } from '../../store/reducers/modalReducer';
-import { setBooks } from '../../store/reducers/booksReducer';
+import { getStoreBooks } from '../utils/selectors';
+import { setModal } from '../store/reducers/modalReducer';
+import { setBooks } from '../store/reducers/booksReducer';
 
-import { getBooks } from '../../api/books';
+import { getBooks } from '../api/books';
 
-import { MODAL_TYPES } from '../../constants';
+import { MODAL_TYPES } from '../constants';
 
 const MainPage = () => {
     const dispatch = useDispatch();
 
     const books = useSelector(getStoreBooks);
 
+    const [searchValue, setSearchValue] = useState('');
     const [isPageReady, setIsPageReady] = useState(false);
+
+    const filteredBooks = useMemo(() => {
+        if (Array.isArray(books) && books.length) {
+            if (!searchValue) return books;
+
+            const lowerSearchValue = (searchValue || '').toLowerCase();
+
+            const isIncludeSearchValue = (value = '') => {
+                return (value || '').toLowerCase().includes(lowerSearchValue);
+            };
+
+            return books.filter((book = {}) => {
+                return (
+                    isIncludeSearchValue(book.name) ||
+                    isIncludeSearchValue(book.author) ||
+                    isIncludeSearchValue(book.genre) ||
+                    isIncludeSearchValue(book.status) ||
+                    isIncludeSearchValue(book.rate) ||
+                    isIncludeSearchValue(book.price) ||
+                    isIncludeSearchValue(book.source)
+                );
+            });
+        }
+
+        return [];
+    }, [books, searchValue]);
 
     useEffect(() => {
         getBooks().then((results) => {
@@ -32,7 +59,7 @@ const MainPage = () => {
             <div className="header">
                 <div>Online library M.K.</div>
                 <div className="add-book-button-container">
-                    <button className="add-book-form-button" onClick={() => {
+                    <button className="form-button" onClick={() => {
                         dispatch(setModal({ modalType: MODAL_TYPES.CREATE_BOOK }));
                     }}>Add book
                     </button>
@@ -41,7 +68,17 @@ const MainPage = () => {
             <div className="main-section">
                 {isPageReady
                     ? <>
-                        {books.length
+                        <div className="search-books-section">
+                            <input type="text" value={searchValue} onChange={(e) => {
+                                setSearchValue(e.target.value);
+                            }} />
+                            <button className="form-button" onClick={() => {
+                                setSearchValue('');
+                            }}>
+                                Clear
+                            </button>
+                        </div>
+                        {filteredBooks.length
                             ? (
                                 <div className="books-list">
                                     <table>
@@ -58,7 +95,7 @@ const MainPage = () => {
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        {books.map((bookData) => {
+                                        {filteredBooks.map((bookData) => {
                                             const {
                                                 id,
                                                 name,
