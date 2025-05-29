@@ -109,6 +109,19 @@ body {
     width: 100%;
 }
 
+.delete-book-modal {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.delete-book-modal-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    gap: 16px;
+}
+
 .add-book-form-button {
     background: darkred;
     color: #fff;
