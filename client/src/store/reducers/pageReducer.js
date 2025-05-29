@@ -1,16 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {};
+const initialState = {
+    userHasAccess: false,
+};
 
 const pageSlice = createSlice({
     name: 'page',
     initialState,
     reducers: {
-        setPageOptions(state, action) {
-            state = action.payload;
+        setUserHasAccess(state, action) {
+            state.userHasAccess = action.payload;
         },
     },
 });
 
-export const { setPageOptions } = pageSlice.actions;
+export const { setUserHasAccess } = pageSlice.actions;
 export default pageSlice.reducer;

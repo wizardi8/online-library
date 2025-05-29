@@ -61,7 +61,8 @@ const MainPage = () => {
                 <div className="add-book-button-container">
                     <button className="form-button" onClick={() => {
                         dispatch(setModal({ modalType: MODAL_TYPES.CREATE_BOOK }));
-                    }}>Add book
+                    }}>
+                        Add book
                     </button>
                 </div>
             </div>

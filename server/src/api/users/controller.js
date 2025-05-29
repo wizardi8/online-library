@@ -1,20 +1,10 @@
 const { UsersService } = require('./service');
 
 class UsersController {
-    static async getAll(req, res) {
-        const data = await UsersService.getAll();
-        res.json({ data });
-    }
+    static async login(req, res) {
+        const { password } = req.query;
 
-    static async get(req, res) {
-        const { id } = req.params;
-
-        const data = await UsersService.get({ id });
-        res.json({ data });
-    }
-
-    static async create(req, res) {
-        const data = await UsersService.create({ data: req.body });
+        const data = await UsersService.login({ password });
         res.json({ data });
     }
 }
