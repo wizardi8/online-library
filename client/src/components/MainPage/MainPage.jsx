@@ -16,6 +16,7 @@ const customStyles = {
         right: 'auto',
         bottom: 'auto',
         marginRight: '-50%',
+        border: '1px solid darkred',
         transform: 'translate(-50%, -50%)',
     },
 };
@@ -208,7 +209,6 @@ const MainPage = () => {
                             onAfterOpen={afterOpenModal}
                             onRequestClose={closeModal}
                             style={customStyles}
-                            contentLabel="Example Modal"
                         >
                             <AddBookForm
                                 submitButtonText={activeModalBook ? 'Update book' : 'Add book'}

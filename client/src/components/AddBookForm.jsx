@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { MAIN_PAGE_GRID_RATES, MAIN_PAGE_GRID_SOURCE, MAIN_PAGE_GRID_STATUSES } from '../constants';
 
 const AddBookForm = ({ onSubmit, submitButtonText, isSubmitButtonLoading, bookData = {} }) => {
-    const { name = '', rate = '', price = '', author = '', status = '', source = '' } = bookData || {};
+    const { name = '', rate = '', genre = '', price = '', author = '', status = '', source = '' } = bookData || {};
 
     const [bookName, setBookName] = useState(name || '');
     const [bookRate, setBookRate] = useState(rate || '5');
-    const [bookGenre, setBookGenre] = useState(name || '');
+    const [bookGenre, setBookGenre] = useState(genre || '');
     const [bookPrice, setBookPrice] = useState(price || '');
     const [bookAuthor, setBookAuthor] = useState(author || '');
     const [bookStatus, setBookStatus] = useState(status || MAIN_PAGE_GRID_STATUSES.UNREAD);
