@@ -66,7 +66,7 @@ const AddBookForm = ({ onSubmit, submitButtonText, isSubmitButtonLoading, bookDa
                 </div>
             </div>
             <div>
-                <button className="add-book-form-button" onClick={() => {
+                <button className="form-button" onClick={() => {
                     const isSuccess = onSubmit({
                         bookName,
                         bookRate,

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import MainPage from './components/MainPage/MainPage';
+import MainPage from './components/MainPage';
 import ModalRoot from './components/Modals/ModalRoot';
 
 import './index.css';

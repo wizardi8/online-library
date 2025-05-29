@@ -55,6 +55,12 @@ body {
     color: #fff;
 }
 
+.search-books-section {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+
 .books-list {
     overflow-y: auto;
     height: calc(100vh - 140px);
@@ -122,7 +128,7 @@ body {
     gap: 16px;
 }
 
-.add-book-form-button {
+.form-button {
     background: darkred;
     color: #fff;
     padding: 4px 16px;

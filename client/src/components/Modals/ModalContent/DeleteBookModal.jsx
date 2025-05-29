@@ -48,7 +48,7 @@ const DeleteBookModal = ({ closeModal, modalProps }) => {
                     closeModal();
                 }}>Cancel
                 </button>
-                <button className="add-book-form-button" onClick={() => {
+                <button className="form-button" onClick={() => {
                     onDeleteBookClick();
                 }}>Delete
                 </button>
