@@ -1,0 +1,19 @@
+{
+  "name": "online-library",
+  "version": "1.0.0",
+  "description": "online library",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wizardi8/online-library.git"
+  },
+  "author": "wizardi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wizardi8/online-library/issues"
+  },
+  "homepage": "https://github.com/wizardi8/online-library#readme"
+}
