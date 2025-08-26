@@ -1,19 +1,30 @@
 {
-  "name": "online-library",
+  "name": "sla-time-and-report-deviations",
   "version": "1.0.0",
-  "description": "online library",
+  "description": "SLA tracking and reporting widget for Jira",
   "main": "index.js",
   "scripts": {
+    "build": "forge build",
+    "deploy": "forge deploy",
+    "install": "forge install",
+    "lint": "eslint .",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@forge/ui": "^1.10.0"
+  },
+  "devDependencies": {
+    "@forge/eslint-config": "^0.7.0",
+    "eslint": "^8.0.0"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wizardi8/online-library.git"
+    "url": "git+https://github.com/your-username/sla-time-and-report-deviations.git"
   },
-  "author": "wizardi",
-  "license": "ISC",
+  "author": "Your Name",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/wizardi8/online-library/issues"
+    "url": "https://github.com/your-username/sla-time-and-report-deviations/issues"
   },
-  "homepage": "https://github.com/wizardi8/online-library#readme"
+  "homepage": "https://github.com/your-username/sla-time-and-report-deviations#readme"
 }

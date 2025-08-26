@@ -1,68 +1,64 @@
-# Online Library
+# SLA Time and Report Deviations Widget
 
-This project consists of a client-side application built with React and a server-side application built with Express.
+Цей Forge віджет відображається в панельці задачі Jira тільки для тих задач, які мають властивість `slatimeandreportdevi`.
 
-## Available Scripts
+## Налаштування
 
-### Client
+### 1. Встановлення залежностей
+```bash
+npm install
+```
 
-In the `client` directory, you can run:
+### 2. Налаштування маніфесту
+Відредагуйте `manifest.yml`:
+- Замініть `your-app-id` на ваш реальний App ID
+- Перевірте, що `propertyKey: slatimeandreportdevi` відповідає ключу властивості в ваших задачах
 
-#### `npm run build`
+### 3. Збірка та розгортання
+```bash
+# Збірка проекту
+forge build
 
-Builds the client application into the `build` folder.\
-The app is ready for deployment.
+# Розгортання в Atlassian
+forge deploy
 
-#### `npm run clean`
+# Встановлення в Jira
+forge install
+```
 
-Cleans the `build` folder by removing all generated files.
+## Структура проекту
 
----
+```
+├── manifest.yml          # Конфігурація Forge додатку
+├── index.js             # Функція-резолвер для віджета
+├── package.json         # Залежності проекту
+├── public/
+│   └── logos/
+│       └── sla-logo.svg # Логотип віджета
+└── README.md           # Цей файл
+```
 
-### Server
+## Важливі моменти
 
-In the `server` directory, you can run:
+### Display Conditions
+Віджет налаштований на відображення тільки коли:
+1. Користувач авторизований (`isLoggedIn: true`)
+2. Задача має властивість з ключем `slatimeandreportdevi` (`entityPropertyExists`)
 
-#### `npm start`
+### Permissions
+Додаток потребує наступні дозволи:
+- `read:jira-work` - для читання даних задач
+- `read:jira-user` - для отримання інформації про користувача
+- `read:jira-property` - для читання властивостей задач
 
-Starts the Express server.\
-The server will listen for requests at the defined port.
+## Виправлення проблем
 
-#### `npm run clean`
+### Віджет не відображається
+1. Перевірте, що задача має властивість з ключем `slatimeandreportdevi`
+2. Переконайтеся, що користувач авторизований
+3. Перевірте логи в Forge Developer Console
 
-Removes all temporary build files inside the `dist` folder.
-
----
-
-## Installation
-
-1. Clone the repository:
-2. Install dependencies:
-
-    - For the client:
-      ```bash
-      cd client
-      npm install
-      ```
-
-    - For the server:
-      ```bash
-      cd server
-      npm install
-      ```
-
-## Usage
-
-1. Start the server:
-   ```bash
-   cd server
-   npm start
-   ```
-
-2. Build the client:
-   ```bash
-   cd client
-   npm run build
-   ```
-
-You can then serve the built client alongside the server.
+### Помилки збірки
+1. Переконайтеся, що всі залежності встановлені
+2. Перевірте синтаксис в `manifest.yml`
+3. Використовуйте `forge lint` для перевірки конфігурації
