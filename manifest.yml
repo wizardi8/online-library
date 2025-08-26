@@ -1,0 +1,33 @@
+modules:
+  jira:issueContext:
+    - key: sla-time-and-report-devi-issue-context
+      title: "[DEV][i] SLA"
+      label: "[DEV][i] SLA"
+      icon: /logos/sla-logo.svg
+      resource: application
+      displayConditions:
+        isLoggedIn: true
+        entityPropertyExists:
+          entity: issue
+          propertyKey: slatimeandreportdevi
+      resolver:
+        function: application-resolver
+
+  function:
+    - key: application-resolver
+      handler: index.handler
+
+permissions:
+  scopes:
+    - read:jira-work
+    - read:jira-user
+    - read:jira-property
+  external:
+    fetch:
+      backend:
+        - api.example.com
+
+app:
+  id: your-app-id
+  name: SLA Time and Report Devi
+  description: SLA Time and Report Devi application
